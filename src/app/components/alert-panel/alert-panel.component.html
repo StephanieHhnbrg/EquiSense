@@ -1,0 +1,4 @@
+<div class="alert mat-elevation-z8" *ngFor="let alert of alerts">
+  <mat-icon>warning</mat-icon>&nbsp;&nbsp;{{alert}}
+  <span class="close-span"><mat-icon (click)="removeAlert(alert)">close</mat-icon></span>
+</div>

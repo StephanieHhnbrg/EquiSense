@@ -1,0 +1,56 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="prompt">
+    <th mat-header-cell *matHeaderCellDef> Prompt </th>
+    <td mat-cell *matCellDef="let element"> {{element.request}} </td>
+  </ng-container>
+
+
+  <ng-container *ngFor="let model of responseModels" [matColumnDef]="getResponseColumnLabel(model)">
+    <th mat-header-cell *matHeaderCellDef>Response&nbsp;&nbsp;<app-model-badge [model]="model"></app-model-badge></th>
+    <td mat-cell *matCellDef="let element">
+      <span>{{element.responses.get(model)?.response | slice:0:100}}</span>&nbsp;&nbsp;
+      <span *ngIf="element.responses.get(model)?.response.length > 100" class="truncated-response" (click) ="openRatingExplanationDialog(element.responses.get(model), undefined)">[...]</span>
+      <app-rating-badge *ngFor="let r of element.responses.get(model)?.ratings"
+                       [rating]="r.rating" [criteria]="r.criteria.name"
+            (click) ="openRatingExplanationDialog(element.responses.get(model), r)">
+      </app-rating-badge>
+    </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container *ngIf="responseModels.length == 0" matColumnDef="response-tbg">
+    <th mat-header-cell *matHeaderCellDef>Response</th>
+    <td mat-cell *matCellDef="let element"> - </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div>
+  <button [disabled]="isResponseGenerationLoading || topic!.prompts.length == 0" *ngIf="responseModels.length < models.length" mat-raised-button (click)="openGenerateResponsesDialog()">
+    <mat-icon *ngIf="!isResponseGenerationLoading">scatter_plot</mat-icon>
+    <app-loading-icon *ngIf="isResponseGenerationLoading"></app-loading-icon>
+    <span> Generate responses</span>
+  </button>
+
+  <button [disabled]="isRatingGenerationLoading" *ngIf="responseModels.length > 0" mat-raised-button (click)="openCreateRatingDialog()">
+    <mat-icon *ngIf="!isRatingGenerationLoading">star</mat-icon>
+    <app-loading-icon *ngIf="isRatingGenerationLoading"></app-loading-icon>
+    <span> Rate responses</span>
+  </button>
+</div>
+
+<div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select table page">
+  </mat-paginator>
+</div>

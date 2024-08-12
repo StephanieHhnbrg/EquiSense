@@ -1,0 +1,9 @@
+.model-badge {
+  background-color: dimgrey;
+  color: white;
+  border-radius: 10px;
+  min-width: 25px;
+  text-align: center;
+  padding: 5px;
+  font-size: xx-small;
+}

@@ -1,0 +1,19 @@
+<mat-toolbar class="mat-elevation-z8" color="primary">
+  <div>
+  <button mat-icon-button>
+    <mat-icon>scatter_plot</mat-icon>
+  </button>
+  <span>EquiSense</span>
+  </div>
+
+  <div>
+    <button mat-raised-button (click)="openAddTopicDialog()"><mat-icon>add</mat-icon> Topics</button>
+    <button [disabled]="isPromptingLoading" mat-raised-button (click)="openGeneratePromptsDialog()">
+      <mat-icon *ngIf="!isPromptingLoading">add</mat-icon>
+      <app-loading-icon *ngIf="isPromptingLoading"></app-loading-icon>
+
+      <span> Prompts</span></button>
+    <button mat-raised-button (click)="openAddKeysDialog()"><mat-icon>key</mat-icon> Keys</button>
+
+  </div>
+</mat-toolbar>

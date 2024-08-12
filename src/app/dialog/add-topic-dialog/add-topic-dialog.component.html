@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Add topic</h2>
+<mat-dialog-content>
+  Which topic would you like to add?
+
+  <form>
+    <mat-form-field>
+      <mat-label>Topic</mat-label>
+      <input matInput #topic maxlength="50">
+      <mat-hint align="end">{{topic.value.length}} / 50</mat-hint>
+    </mat-form-field>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close
+          [disabled]="topic.value.length == 0"
+          (click)="addTopic(topic.value)"
+  >Add</button>
+</mat-dialog-actions>

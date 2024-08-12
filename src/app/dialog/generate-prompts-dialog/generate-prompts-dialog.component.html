@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Create prompts</h2>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <mat-label>Select a topic:</mat-label>
+    <mat-select #topicSelect>
+      <mat-option *ngFor="let topic of topics" [value]="topic">{{topic.name}} ({{topic.prompts.length}})</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-tab-group animationDuration="150ms" [selectedIndex]="tabSelected.value" (selectedIndexChange)="tabSelected.setValue($event)">
+    <mat-tab label="Generate">
+      <mat-form-field>
+        <mat-label>Select a model:</mat-label>
+        <mat-select #modelSelect>
+          <mat-option *ngFor="let model of models" [value]="model">{{model}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </mat-tab>
+    <mat-tab label="Input">
+      <mat-form-field>
+        <mat-label>Your prompts</mat-label>
+        <textarea #prompts matInput></textarea>
+      </mat-form-field>
+    </mat-tab>
+  </mat-tab-group>
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close
+          [disabled]="!topicSelect.value || (tabSelected.value == 0 && !modelSelect.value) || (tabSelected.value == 1 && prompts.value.length == 0)"
+          (click)="tabSelected.value == 0 ? generatePrompts(topicSelect.value, modelSelect.value) : addPrompts(topicSelect.value, prompts.value)"
+  >Create</button>
+</mat-dialog-actions>

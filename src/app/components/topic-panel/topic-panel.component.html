@@ -1,0 +1,9 @@
+<mat-expansion-panel [expanded]="true" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span>Topic: {{ topic!.name }}&nbsp;&nbsp;</span>
+      <span class="badge" *ngIf="topic!.prompts.length>0">&nbsp;{{topic!.prompts.length}}&nbsp;</span>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <app-prompt-table [topic]="topic!"></app-prompt-table>
+</mat-expansion-panel>

@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Generate responses</h2>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <mat-label>Select a model:</mat-label>
+    <mat-select #modelSelect>
+      <mat-option *ngFor="let model of modelOptions" [value]="model">{{model}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close
+          [disabled]="!modelSelect.value"
+          (click)="selectResponseModel(modelSelect.value)"
+  >Generate</button>
+</mat-dialog-actions>

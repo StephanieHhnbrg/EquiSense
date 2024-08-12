@@ -1,0 +1,11 @@
+.badge {
+  background-color: darkcyan;
+  color: white;
+  border-radius: 10px;
+  min-width: 25px;
+  text-align: center;
+}
+
+mat-accordion {
+  padding-bottom: 25px;
+}

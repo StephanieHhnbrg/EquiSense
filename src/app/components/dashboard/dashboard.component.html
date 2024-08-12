@@ -1,0 +1,7 @@
+<div class="frame">
+  <app-alert-panel></app-alert-panel>
+  <h6>Your Topics</h6>
+    <mat-accordion>
+      <app-topic-panel *ngFor="let topic of topics" [topic]="topic"></app-topic-panel>
+    </mat-accordion>
+</div>

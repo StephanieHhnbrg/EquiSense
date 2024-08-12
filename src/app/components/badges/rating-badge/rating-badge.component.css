@@ -1,0 +1,18 @@
+.rating-badge {
+  background-color: orange;
+  color: white;
+  border-radius: 10px;
+  min-width: 25px;
+  text-align: center;
+  padding: 5px 7px 5px 0px;
+  font-size: xx-small;
+}
+
+.rating-badge:hover {
+  background-color: darkorange;
+  cursor: pointer;
+}
+
+.rating-badge mat-icon {
+  transform: scale(0.5) translateY(17px);
+}

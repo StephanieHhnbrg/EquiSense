@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Add API Key</h2>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <mat-label>Select a GenAI API:</mat-label>
+    <mat-select #apiSelect>
+      <mat-option *ngFor="let api of genaiApis" [value]="api"><mat-icon *ngIf="hasValidKey(api)">task_alt</mat-icon> {{api}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <form>
+    <mat-form-field>
+      <mat-label>API-Key</mat-label>
+      <input matInput #key>
+      <mat-hint *ngIf="apiSelect.value && hasValidKey(apiSelect.value)">Hint: You are overwritting your existing {{apiSelect.value}} API key.</mat-hint>
+    </mat-form-field>
+  </form>
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close
+          [disabled]="!apiSelect.value || key.value.length == 0"
+          (click)="addApiKey(apiSelect.value, key.value)"
+  >Create</button>
+</mat-dialog-actions>

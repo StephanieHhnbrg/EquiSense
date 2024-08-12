@@ -1,0 +1,9 @@
+table {
+  width: 100%;
+}
+
+.truncated-response:hover {
+  text-decoration: underline;
+}
+
+

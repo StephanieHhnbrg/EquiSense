@@ -1,0 +1,26 @@
+.alert {
+  text-align: left;
+  width: 100%;
+  background-color: darkorange;
+  color: white;
+  border-radius: 10px;
+  min-width: 500px;
+  font-size: smaller;
+  padding: 2px 0 5px 0;
+  margin-bottom: 10px;
+}
+
+.alert mat-icon {
+  color: white;
+  transform: scale(0.75) translateX(5px) translateY(10px);
+}
+
+.close-span {
+  float: right;
+  margin-right: 10px;
+}
+
+.close-span mat-icon:hover {
+  cursor: pointer;
+  transform: scale(1.005) translateX(3px) translateY(5px);
+}

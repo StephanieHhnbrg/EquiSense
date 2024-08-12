@@ -1,0 +1,14 @@
+form {
+  padding-top: 10px;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-pseudo-checkbox {
+  visibility: hidden;
+}
