@@ -1,7 +1,10 @@
 mat-toolbar {
-  justify-content: space-between;
   position: absolute;
   bottom: 0;
   width: 100vw;
   z-index: 1000;
+}
+
+.file-input {
+  display: none;
 }
