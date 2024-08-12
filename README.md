@@ -1,27 +1,41 @@
-# EquiSense
+# 🫧 EquiSense
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?color=blue)](./LICENSE)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+### Introduction
+Due to AI's ability to learn from data and readjust itself, there is a risk of unintended consequences, 
+like ethical risks, biases (stereotyping, prejudice or favoritism) and unexplainable outcomes.
+This project provides a GUI to assess these risks. By analyzing responses of different GenAI models and judge them on different criteria,
+machine learning engineers and data scientists can identify, quantify, and mitigate biases, ensuring that the models align with ethical standards and produce more equitable and transparent outcomes.
 
-## Development server
+To achieve this goal, several GenAI APIs have been integrated to address the following three use cases:
+1. Prompt Generation: Generate prompts based on a user-selected topic.
+2. Response Generation: Produce responses from the integrated GenAI models.
+3. Response Evaluation: Assess the generated responses using criteria such as bias, ... .
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Tutorial
+To execute any request to a GenAI API, you must provide a valid API key for the selected service. 
+This can be done using the `🔑 Keys` button in the toolbar.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+If an API key is missing or invalid, an alert will appear when attempting to perform any GenAI operation, 
+and any invalid key will be automatically removed.
 
-## Build
+Once a valid key is entered, you can initiate GenAI operations by clicking the `➕ Prompts` button in the toolbar, 
+or by using the `🫧 Generate responses` and `⭐ Rate responses` buttons within the expansion panels of the topics.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### APIs & Models
+The following APIs and models are currently supported:
 
-## Running unit tests
+API | Model 
+--- |-------
+Gemini | `gemini-1.0-pro`, `gemini-1.5-pro`, `gemini-1.5-flash`
+OpenAI | `gpt-3.5-turbo`, `gpt-3.5-turbo-0125`, `gpt-3.5-turbo-1106`, `gpt-3.5-turbo-16k`, `gpt-4o-mini`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Local set up
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4and is deployed as a <a href='https://stephaniehhnbrg.github.io/EquiSense/' target='_blank'>Github Page</a>.
+But in case you would like to run the project locally, follow these steps:
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Install dependencies: `npm install`
+- Start project: `npm run start`

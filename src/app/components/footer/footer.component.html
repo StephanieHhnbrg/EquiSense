@@ -1,5 +1,13 @@
 <mat-toolbar color="primary">
   <div>
-    <button mat-raised-button><mat-icon>download</mat-icon> Download Data</button>
+    <input type="file" class="file-input" (change)="uploadData($event)" #fileUpload>
+    <button mat-raised-button (click)="fileUpload.click()">
+      <mat-icon aria-hidden="false" fontIcon="upload_file"></mat-icon>
+      Upload Data
+    </button>
+  </div>
+
+  <div>
+    <button mat-raised-button (click)="downloadData()"><mat-icon>download</mat-icon> Download Data</button>
   </div>
 </mat-toolbar>

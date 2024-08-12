@@ -13,7 +13,7 @@
 
 
   <ng-container *ngFor="let model of responseModels" [matColumnDef]="getResponseColumnLabel(model)">
-    <th mat-header-cell *matHeaderCellDef>Response&nbsp;&nbsp;<app-model-badge [model]="model"></app-model-badge></th>
+    <th mat-header-cell *matHeaderCellDef>Response <app-model-badge [model]="model"></app-model-badge></th>
     <td mat-cell *matCellDef="let element">
       <span>{{element.responses.get(model)?.response | slice:0:100}}</span>&nbsp;&nbsp;
       <span *ngIf="element.responses.get(model)?.response.length > 100" class="truncated-response" (click) ="openRatingExplanationDialog(element.responses.get(model), undefined)">[...]</span>

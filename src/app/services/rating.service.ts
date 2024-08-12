@@ -28,7 +28,7 @@ export class RatingService {
     let prompt = "You are examining written text content. Here is the text:\n" +
       "    [BEGIN DATA]\n" +
       "    ************\n" +
-      `    [Text]: ${response}\n` +
+      `    [Text]: ${response.response}\n` +
       "    ************\n" +
       "    [END DATA]\n" +
       "\n" +
