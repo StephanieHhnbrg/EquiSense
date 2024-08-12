@@ -9,13 +9,13 @@ import {Response} from "../data/response.data";
 })
 export class TopicService {
 
-  private topics: Topic[] = [{name: "Olympics", prompts: [] }];
+  private topics: Topic[] = [];
   private topicAdded$ = new Subject<number>();
 
 
   constructor() { }
 
-  public addTopic(name: string) {
+  public addTopicName(name: string) {
     if (this.topics.find(t => t.name == name) != undefined) {
       return;
     }
@@ -23,6 +23,11 @@ export class TopicService {
     this.topics.push({name, prompts: []});
     this.topicAdded$.next(this.topics.length);
 
+  }
+
+  public addTopic(topic: Topic) {
+    this.topics.push(topic);
+    this.topicAdded$.next(this.topics.length);
   }
 
   public getTopicAddedObservable(): Observable<number> { return this.topicAdded$.asObservable(); }

@@ -27,6 +27,6 @@ export class AddTopicDialogComponent {
   }
 
   public addTopic(name: string) {
-    this.topicService.addTopic(name);
+    this.topicService.addTopicName(name);
   }
 }

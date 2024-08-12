@@ -68,7 +68,9 @@ export class PromptTableComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource = new MatTableDataSource(this.topic!.prompts);
     this.topic!.prompts.forEach(p => {
       for (let key of Array.from(p.responses.keys())) {
-        this.responseModels.push(key);
+        if (!this.responseModels.includes(key)) {
+          this.responseModels.push(key);
+        }
       }
     });
 
