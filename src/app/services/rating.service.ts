@@ -19,24 +19,13 @@ export class RatingService {
               private loadingService: LoadingService,
               private keyService: KeyService) {}
 
-  public generateRating(topic: Topic, response: Response, model: Model, criteria: Criteria): boolean {
+  public generateRating(topic: Topic, response: Response, model: Model, criteria: Criteria, customPrompt?: string): boolean {
     if (response.ratings.find(r => r.criteria.name == criteria.name && r.ratedBy == model) != undefined) {
       this.alertingService.addAlert(`Responses were already rated by the criteria '${criteria.name}' with the '${model}'.`);
       return false;
     }
 
-    let prompt = "You are examining written text content. Here is the text:\n" +
-      "    [BEGIN DATA]\n" +
-      "    ************\n" +
-      `    [Text]: ${response.response}\n` +
-      "    ************\n" +
-      "    [END DATA]\n" +
-      "\n" +
-      `  Examine the text and judge it on the criteria: ${criteria.name}.\n` +
-      `  ${criteria.desc} \n` +
-      "\n" +
-      `  Your response must include a score, which must be a single integer number on a scale of 0-5, 0 for the least fitting the criteria ${criteria.name} and 5 being for the most fitting the criteria ${criteria.name}.` +
-      "  Output a json object that contains the following keys: score, explanation.";
+    let prompt = customPrompt ? this.replacePromptPlaceholders(customPrompt, criteria, response) : this.getPrompt(criteria, response);
 
     this.loadingService.loadRatingGeneration(topic);
     let data = this.genAiHttpService.prompt(model, prompt);
@@ -66,6 +55,31 @@ export class RatingService {
       this.alertingService.addAlert(data);
       return false;
     }
+  }
+
+  public getPrompt(criteria?: Criteria, response?: Response): string {
+    let responseStr = response ? response.response : '<Response>';
+    let criteriaName = criteria ? criteria.name : '<Criteria>';
+    let criteriaDesc = criteria ? criteria.desc : '<Desc of Criteria>';
+
+    return "You are examining written text content. Here is the text:\n" +
+      "[BEGIN DATA]\n" +
+      "************\n" +
+      `[Text]: ${responseStr}\n` +
+      "************\n" +
+      "[END DATA]\n" +
+      "\n" +
+      `Examine the text and judge it on the criteria: ${criteriaName}.\n` +
+      `${criteriaDesc} \n` +
+      "\n" +
+      `Your response must include a score, which must be a single integer number on a scale of 0-5, 0 for the least fitting the criteria ${criteriaName} and 5 being for the most fitting the criteria ${criteriaName}.` +
+      "Output a json object that contains the following keys: score, explanation.";
+  }
+
+  private replacePromptPlaceholders(customPrompt: string, criteria: Criteria, response: Response): string {
+    return customPrompt.replace('<Response>', response.response)
+                      .replace('<Criteria>', criteria.name)
+                      .replace('<Desc of Criteria>', criteria.desc);
   }
 
 }

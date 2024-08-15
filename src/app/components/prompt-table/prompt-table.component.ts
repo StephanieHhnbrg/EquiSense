@@ -143,7 +143,7 @@ export class PromptTableComponent implements OnInit, OnDestroy, AfterViewInit {
     let ratingInputSelected$ = new Subject<RatingParam>();
     this.subscriptions.push(ratingInputSelected$.asObservable().subscribe(param => {
       param.responseModels.forEach(responseModel => {
-        this.generateRatings(responseModel, param.ratingModel, param.criteria);
+        this.generateRatings(responseModel, param.ratingModel, param.criteria, param.updatedPrompt);
       });
     }));
 
@@ -183,11 +183,11 @@ export class PromptTableComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  private generateRatings(responseModel: Model, ratingModel: Model, criteria: Criteria) {
+  private generateRatings(responseModel: Model, ratingModel: Model, criteria: Criteria, customPrompt?: string) {
     this.topic!.prompts.forEach(p => {
       if (p.responses.has(responseModel)) {
         let response = p.responses.get(responseModel);
-        if(!this.ratingService.generateRating(this.topic!, response!, ratingModel, criteria)) {
+        if(!this.ratingService.generateRating(this.topic!, response!, ratingModel, criteria, customPrompt)) {
           return;
         }
       }

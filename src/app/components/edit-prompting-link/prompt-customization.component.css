@@ -1,0 +1,17 @@
+.edit-prompting:hover {
+  color: cyan;
+  cursor: pointer;
+}
+
+.edit-prompting mat-icon {
+  transform: scale(0.6) translateY(13px);
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+mat-form-field {
+  width: 100%;
+  padding-top: 20px;
+}

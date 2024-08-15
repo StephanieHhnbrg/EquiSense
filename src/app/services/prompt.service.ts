@@ -18,10 +18,9 @@ export class PromptService {
               private loadingService: LoadingService,
               private keyService: KeyService) {}
 
-  public generatePrompts(topic: Topic, model: Model) {
-    let prompt = `You are an expert in the topic ${topic.name} and you are invited to a conference. `
-    + `To be prepared on potential questions, make a list of questions the audience, consisting of a wide range of people from different background and expertise, could ask you. `
-    + `Answer by only providing a bullet point list of minimum 20 questions.`;
+  public generatePrompts(topic: Topic, model: Model, customPrompt?: string) {
+    let prompt = customPrompt ? customPrompt.replace('<Topic>', topic.name) : this.getPrompt(topic);
+    console.log(prompt);
     this.loadingService.loadPromptGeneration();
     let data = this.genAiHttpService.prompt(model, prompt);
     if (data instanceof Observable) {
@@ -48,5 +47,12 @@ export class PromptService {
       this.loadingService.promptGenerationCompleted();
       this.alertingService.addAlert(data);
     }
+  }
+
+  public getPrompt(topic: Topic | undefined): string {
+    let value = topic ? topic.name : '<Topic>'
+    return `You are an expert in the topic ${value} and you are invited to a conference. `
+    + `To be prepared on potential questions, make a list of questions the audience, consisting of a wide range of people from different background and expertise, could ask you. `
+    + `Answer by only providing a bullet point list of minimum 20 questions.`;
   }
 }

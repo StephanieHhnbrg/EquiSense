@@ -24,6 +24,7 @@
     </mat-select>
   </mat-form-field>
 
+  <app-prompt-customization [defaultPrompt]="getRatingGenerationPrompt(criteriaSelect.value)" (updatedPrompt)="updatePrompt($event)"></app-prompt-customization>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close

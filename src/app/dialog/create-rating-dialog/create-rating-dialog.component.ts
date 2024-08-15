@@ -17,11 +17,13 @@ import {Criteria, CRITERIA_LIST} from "../../data/criteria.data";
 import {Subject} from "rxjs";
 import {RatingParam} from "../../data/rating.data";
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {PromptCustomizationComponent} from "../../components/edit-prompting-link/prompt-customization.component";
+import { RatingService } from '../../services/rating.service';
 
 @Component({
   selector: 'app-create-rating-dialog',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule, MatCheckboxModule],
+  imports: [CommonModule, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule, MatCheckboxModule, PromptCustomizationComponent],
   templateUrl: './create-rating-dialog.component.html',
   styleUrl: './create-rating-dialog.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -32,9 +34,11 @@ export class CreateRatingDialogComponent implements OnInit {
   public criteria: Criteria[] = CRITERIA_LIST;
   public responseModels: Model[] = [];
   public responseModelsParam: Model[] = [];
+  private updatedPrompt: string | undefined;
 
 
   constructor(private ref: ChangeDetectorRef,
+            private ratingService: RatingService,
             @Inject(MAT_DIALOG_DATA) public data: { responseModels: Model[], ratingInputSelected$: Subject<RatingParam> }) {}
 
   public ngOnInit() {
@@ -43,7 +47,7 @@ export class CreateRatingDialogComponent implements OnInit {
   }
 
   public selectRatingParams(ratingModel: Model, criteria: Criteria) {
-    this.data.ratingInputSelected$.next({criteria, ratingModel, responseModels: this.responseModelsParam})
+    this.data.ratingInputSelected$.next({criteria, ratingModel, responseModels: this.responseModelsParam, updatedPrompt: this.updatedPrompt})
   }
 
   public updateAllCheckbox(checked: boolean) {
@@ -73,6 +77,14 @@ export class CreateRatingDialogComponent implements OnInit {
 
   public isModelChecked(model: Model): boolean {
     return this.responseModelsParam.length < this.responseModels.length && this.responseModelsParam.find(m => m == model) != undefined;
+  }
+
+  public updatePrompt(prompt: string) {
+    this.updatedPrompt = prompt;
+  }
+
+  public getRatingGenerationPrompt(criteria: Criteria | undefined): string {
+    return this.ratingService.getPrompt(criteria);
   }
 
 }
