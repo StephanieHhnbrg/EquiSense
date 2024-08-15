@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Create rating</h2>
-<mat-dialog-content>
+<mat-dialog-content class="rating-dialog">
   <div *ngIf="responseModels.length > 1">
     <p>Which responses would you like to rate?</p>
 
@@ -16,6 +16,8 @@
       <mat-option *ngFor="let c of criteria" [value]="c">{{c.name}}</mat-option>
     </mat-select>
   </mat-form-field>
+  <span class="view-criteria" (click)="openCriteriaDialog()"><mat-icon>visibility</mat-icon> View criteria</span>
+
 
   <mat-form-field>
     <mat-label>Select a model:</mat-label>

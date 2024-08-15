@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Criteria</h2>
+<mat-dialog-content>
+
+  <div *ngFor="let c of criteria">
+    <p>Criteria: {{c.name}}</p>
+    <small>{{ c.desc }}</small>
+    <p>&nbsp;</p>
+  </div>
+
+  <div>
+    <div [ngClass]="{'hidden': !addingCriteria}">
+      <form>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput #criteriaName>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea matInput #criteriaDesc></textarea>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button
+          [disabled]="addingCriteria && (criteriaName.value.length == 0 || criteriaDesc.value.length == 0)"
+          (click)="addingCriteria ? addCriteria(criteriaName.value, criteriaDesc.value) : addingCriteria = true"
+  ><mat-icon>add</mat-icon> Add Criteria</button>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -13,9 +13,10 @@ To achieve this goal, several GenAI APIs have been integrated to address the fol
 3. Response Evaluation: Assess the generated responses using criteria such as bias, ... .
 
 #### Features
-✏️ Customizable Prompts - The prompts used for the prompt generation and the response evaluation/rating can be customized.
-🌐 Multilanguage support - By customizing the prompts and translate them to an other language, prompts, responses and ratings will be generated in this custom language.
-📋 Excel Export and Import - To save the generated data, it can be exported into an .xlsx file, which can be imported in another session to continue the user's journey.
+✏️ Customizable Prompts - The prompts used for the prompt generation and the response evaluation/rating can be customized. \
+🌐 Multilanguage support - By customizing the prompts and translate them to an other language, prompts, responses and ratings will be generated in this custom language. \
+📋 Excel Export and Import - To save the generated data, it can be exported into an .xlsx file, which can be imported in another session to continue the user's journey. \
+🔍 Personalized Criteria - The user can define their own criteria for rating GenAIs responses.
 
 ### Tutorial
 To execute any request to a GenAI API, you must provide a valid API key for the selected service. 
