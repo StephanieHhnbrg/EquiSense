@@ -12,4 +12,5 @@ export interface RatingParam {
   criteria: Criteria,
   ratingModel: Model;
   responseModels: Model[];
+  updatedPrompt: string | undefined;
 }

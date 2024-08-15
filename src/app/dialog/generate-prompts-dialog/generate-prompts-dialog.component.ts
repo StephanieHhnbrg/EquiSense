@@ -19,13 +19,14 @@ import { Response } from '../../data/response.data';
 import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import {PromptService} from "../../services/prompt.service";
+import {PromptCustomizationComponent} from "../../components/edit-prompting-link/prompt-customization.component";
 
 
 
 @Component({
   selector: 'app-generate-prompts-dialog',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule, MatTabsModule],
+  imports: [CommonModule, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule, MatTabsModule, PromptCustomizationComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './generate-prompts-dialog.component.html',
   styleUrl: './generate-prompts-dialog.component.css'
@@ -35,7 +36,7 @@ export class GeneratePromptsDialogComponent implements OnInit {
   public topics: Topic[] = [];
   public models = Object.values(Model);
   tabSelected = new FormControl(0);
-
+  private updatedPrompt: string | undefined;
 
   constructor(private topicService: TopicService,
               private promptService: PromptService) {}
@@ -47,7 +48,7 @@ export class GeneratePromptsDialogComponent implements OnInit {
   public generatePrompts(topic: Topic, modelLabel: string) {
     let model = getModelByString(modelLabel);
     if (model) {
-      this.promptService.generatePrompts(topic, model);
+      this.promptService.generatePrompts(topic, model, this.updatedPrompt);
     }
   }
 
@@ -56,6 +57,14 @@ export class GeneratePromptsDialogComponent implements OnInit {
     prompts.forEach(p => {
       topic.prompts.push({request:p, generatedBy: "by_user", responses: new Map<Model, Response>()});
     })
+  }
+
+  public updatePrompt(prompt: string) {
+    this.updatedPrompt = prompt;
+  }
+
+  public getPromptGenerationPrompt(topic: Topic | undefined): string {
+    return this.promptService.getPrompt(topic);
   }
 
 }

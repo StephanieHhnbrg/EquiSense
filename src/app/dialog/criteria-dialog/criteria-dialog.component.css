@@ -7,18 +7,17 @@ form {
 
 mat-form-field {
   width: 100%;
-  padding-top: 20px;
 }
 
-.view-criteria:hover {
+.add-criteria:hover {
   color: cyan;
   cursor: pointer;
 }
 
-.view-criteria mat-icon {
+.add-criteria mat-icon {
   transform: scale(0.6) translateY(13px);
 }
 
-::ng-deep .rating-dialog .mat-mdc-form-field-bottom-align {
-  max-height: 5px;
+.hidden {
+  visibility: hidden;
 }

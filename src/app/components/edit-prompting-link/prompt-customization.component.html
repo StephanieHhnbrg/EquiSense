@@ -1,0 +1,9 @@
+<div>
+  <span *ngIf="!editingPrompt" class="edit-prompting" (click)="editingPrompt=true"><mat-icon>edit</mat-icon> Adapt prompting</span>
+  <div [ngClass]="{'hidden': !editingPrompt}">
+    <mat-form-field>
+      <mat-label>Prompt</mat-label>
+      <textarea #promptUpdated matInput [value]="defaultPrompt" (change)='onChange(promptUpdated.value)'></textarea>
+    </mat-form-field>
+  </div>
+</div>

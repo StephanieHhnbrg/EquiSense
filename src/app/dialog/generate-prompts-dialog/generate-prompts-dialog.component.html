@@ -17,6 +17,8 @@
         </mat-select>
       </mat-form-field>
 
+    <app-prompt-customization [defaultPrompt]="getPromptGenerationPrompt(topicSelect.value)" (updatedPrompt)="updatePrompt($event)"></app-prompt-customization>
+
     </mat-tab>
     <mat-tab label="Input">
       <mat-form-field>
