@@ -1,0 +1,8 @@
+<span *ngIf="statistics.length > 0"><b>Token Usage&nbsp;</b></span>
+<span *ngFor="let stats of statistics; let i = index">
+  {{ stats.genaiApi }}:
+  <span matTooltip="Prompt Tokens" matTooltipPosition="above">{{ stats.inputTokens | number }}</span>
+  <span>&nbsp;|&nbsp;</span>
+  <span matTooltip="Response Tokens" matTooltipPosition="above">{{ stats.outputTokens | number }}</span>
+  <span *ngIf="i < statistics.length-1">&nbsp;&nbsp;</span>
+</span>

@@ -4,8 +4,6 @@ import {
   Component,
   inject,
   Inject,
-  model,
-  ModelSignal,
   OnInit
 } from '@angular/core';
 import {CommonModule} from "@angular/common";
@@ -72,7 +70,6 @@ export class CreateRatingDialogComponent implements OnInit {
     } else {
       this.responseModelsParam = [];
     }
-    console.log(this.responseModelsParam);
     this.ref.detectChanges();
 
   }
@@ -87,7 +84,6 @@ export class CreateRatingDialogComponent implements OnInit {
     } else {
       this.responseModelsParam = this.responseModelsParam.filter(m => m != model);
     }
-    console.log(this.responseModelsParam);
     this.ref.detectChanges();
   }
 

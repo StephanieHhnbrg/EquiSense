@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
-import { KeyService } from './key.service';
-import { Model } from '../data/model.data';
-import { GeminiResponse } from '../data/gemini-response.data';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {KeyService} from './key.service';
+import {Model} from '../data/model.data';
+import {GeminiResponse} from '../data/gemini-response.data';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {TokenUsageService} from './token-usage.service';
+import {GenaiApi} from "../data/genai-api.data";
+import { GptResponse } from '../data/gpt-response.data';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +14,7 @@ import { Observable } from 'rxjs';
 export class GenAiHttpService {
 
   constructor(private keyService: KeyService,
+              private tokenUsageService: TokenUsageService,
               private http: HttpClient) { }
 
 
@@ -81,17 +85,16 @@ export class GenAiHttpService {
 
   public retrieveResponseAsString(model: Model, response: unknown): string {
     if (model.startsWith("gemini")) {
-      return this.retrieveGeminiResponse(response);
-
+      const geminiResponse: GeminiResponse = response as GeminiResponse;
+      this.tokenUsageService.logTokenUsage(GenaiApi.Gemini, geminiResponse.usageMetadata.promptTokenCount, geminiResponse.usageMetadata.candidatesTokenCount);
+      return geminiResponse.candidates[0].content.parts[0].text;
     } else if (model.startsWith("gpt")) {
-      return JSON.stringify(response); // TODO:
+      const gptResponse: GptResponse = response as GptResponse;
+      this.tokenUsageService.logTokenUsage(GenaiApi.ChatGPT, gptResponse.usage.prompt_tokens, gptResponse.usage.completion_tokens);
+      return gptResponse.choices[0].message.content;
     }
     return `'${model}' is not yet supported!`; // will never reach here.
   }
 
-  private retrieveGeminiResponse(res: unknown): string {
-    const response: GeminiResponse = res as GeminiResponse;
-    return response.candidates[0].content.parts[0].text;
-  }
 
 }

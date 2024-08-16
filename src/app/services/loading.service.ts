@@ -24,11 +24,9 @@ export class LoadingService {
     if (this.loadingRatings.has(topic.name)) {
       let loadings = this.loadingRatings.get(topic.name);
       this.loadingRatings.set(topic.name, loadings!+1);
-      console.log(loadings!+1 + " " + topic.name);
       this.areRatingsLoading$.next({topic: topic.name, loading: loadings!+1});
     } else {
       this.loadingRatings.set(topic.name, 1);
-      console.log(1 + " " + topic.name) ;
       this.areRatingsLoading$.next({topic: topic.name, loading: 1});
     }
   }
@@ -37,11 +35,9 @@ export class LoadingService {
     if (this.loadingResponses.has(topic.name)) {
       let loadings = this.loadingResponses.get(topic.name);
       this.loadingResponses.set(topic.name, loadings!+1);
-      console.log(loadings!+1 + " " + topic.name);
       this.areResponsesLoading$.next({topic: topic.name, loading: loadings!+1});
     } else {
       this.loadingResponses.set(topic.name, 1);
-      console.log(1 + " " + topic.name);
       this.areResponsesLoading$.next({topic: topic.name, loading: 1});
     }
   }
@@ -54,7 +50,6 @@ export class LoadingService {
     if (this.loadingRatings.has(topic.name)) {
       let loadings = this.loadingRatings.get(topic.name);
       this.loadingRatings.set(topic.name, loadings!-1);
-      console.log(loadings!-1 + " " + topic.name);
       this.areRatingsLoading$.next({topic: topic.name, loading: loadings!-1});
     }  }
 
@@ -62,7 +57,6 @@ export class LoadingService {
     if (this.loadingResponses.has(topic.name)) {
       let loadings = this.loadingResponses.get(topic.name);
       this.loadingResponses.set(topic.name, loadings!-1);
-      console.log(loadings!-1 + " " + topic.name);
       this.areResponsesLoading$.next({topic: topic.name, loading: loadings!-1});
     }
   }
