@@ -10,13 +10,14 @@ machine learning engineers and data scientists can identify, quantify, and mitig
 To achieve this goal, several GenAI APIs have been integrated to address the following three use cases:
 1. Prompt Generation: Generate prompts based on a user-selected topic.
 2. Response Generation: Produce responses from the integrated GenAI models.
-3. Response Evaluation: Assess the generated responses using criteria such as bias, ... .
+3. Response Evaluation: Assess the generated responses using criteria such as bias and fairness.
 
 #### Features
 ✏️ Customizable Prompts - The prompts used for the prompt generation and the response evaluation/rating can be customized. \
-🌐 Multilanguage support - By customizing the prompts and translate them to an other language, prompts, responses and ratings will be generated in this custom language. \
+🌐 Multilanguage support - By customizing the prompts and translating them to another language, prompts, responses and ratings will be generated in this custom language. \
 📋 Excel Export and Import - To save the generated data, it can be exported into an .xlsx file, which can be imported in another session to continue the user's journey. \
-🔍 Personalized Criteria - The user can define their own criteria for rating GenAIs responses.
+🔍 Personalized Criteria - The user can define their own criteria for rating GenAIs responses. \
+💎 Token Statistics - In the footer the used prompt tokens and response tokens are listed for each approached GenAI API.
 
 ### Tutorial
 To execute any request to a GenAI API, you must provide a valid API key for the selected service. 

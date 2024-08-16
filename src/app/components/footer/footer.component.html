@@ -1,13 +1,18 @@
 <mat-toolbar color="primary">
-  <div>
-    <input type="file" class="file-input" (change)="uploadData($event)" #fileUpload>
-    <button mat-raised-button (click)="fileUpload.click()">
-      <mat-icon aria-hidden="false" fontIcon="upload_file"></mat-icon>
-      Upload Data
-    </button>
+  <div class="buttons">
+    <div>
+      <input type="file" class="file-input" (change)="uploadData($event)" #fileUpload>
+      <button mat-raised-button (click)="fileUpload.click()">
+        <mat-icon aria-hidden="false" fontIcon="upload_file"></mat-icon>
+        Upload Data
+      </button>
+    </div>
+
+    <div>
+      <button mat-raised-button (click)="downloadData()"><mat-icon>download</mat-icon> Download Data</button>
+    </div>
   </div>
 
-  <div>
-    <button mat-raised-button (click)="downloadData()"><mat-icon>download</mat-icon> Download Data</button>
-  </div>
+
+  <app-token-statistics></app-token-statistics>
 </mat-toolbar>

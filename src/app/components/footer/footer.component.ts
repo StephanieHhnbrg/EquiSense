@@ -5,11 +5,12 @@ import {MatButtonModule} from "@angular/material/button";
 import { ExportService } from '../../services/export.service';
 import { ImportService } from '../../services/import.service';
 import { AlertingService } from '../../services/alerting.service';
+import {TokenStatisticsComponent} from "../token-statistics/token-statistics.component";
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule],
+  imports: [MatToolbarModule, MatIconModule, MatButtonModule, TokenStatisticsComponent],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })

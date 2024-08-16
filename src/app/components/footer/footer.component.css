@@ -1,8 +1,15 @@
 mat-toolbar {
   position: absolute;
+  justify-content: space-between;
   bottom: 0;
   width: 100vw;
   z-index: 1000;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .file-input {

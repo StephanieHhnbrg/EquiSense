@@ -20,7 +20,6 @@ export class PromptService {
 
   public generatePrompts(topic: Topic, model: Model, customPrompt?: string) {
     let prompt = customPrompt ? customPrompt.replace('<Topic>', topic.name) : this.getPrompt(topic);
-    console.log(prompt);
     this.loadingService.loadPromptGeneration();
     let data = this.genAiHttpService.prompt(model, prompt);
     if (data instanceof Observable) {
@@ -32,7 +31,7 @@ export class PromptService {
             topic.prompts.push({request: p, generatedBy: model, responses: new Map<Model, Response>()});
           })
         },
-        complete: () => { console.log("prompts complete"); this.loadingService.promptGenerationCompleted(); },
+        complete: () => { this.loadingService.promptGenerationCompleted(); },
         error: (error) => {
           this.loadingService.promptGenerationCompleted();
           if (error.status == 401 || error.error.error.code == 400) {

@@ -31,7 +31,7 @@ export class ResponseService {
           let response = this.genAiHttpService.retrieveResponseAsString(model, d);
           prompt.responses.set(model, {response, ratings: [], generatedBy: model});
         },
-        complete: () => { console.log("response complete"); this.loadingService.responseGenerationCompleted(topic); },
+        complete: () => { this.loadingService.responseGenerationCompleted(topic); },
         error: (error) => {
           if (error.status == 401 || error.error.error.code == 400) {
             this.loadingService.responseGenerationCompleted(topic);

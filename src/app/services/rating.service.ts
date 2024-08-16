@@ -37,7 +37,7 @@ export class RatingService {
           let rating: number = +res.split("score\":")[1].split(",")[0]
           response.ratings.push({rating, explanation, criteria, ratedBy: model});
         },
-        complete: () => { console.log("ratings complete"); this.loadingService.ratingGenerationCompleted(topic);},
+        complete: () => { this.loadingService.ratingGenerationCompleted(topic);},
         error: (error) => {
           this.loadingService.ratingGenerationCompleted(topic);
           if (error.status == 401 || error.error.error.code == 400) {

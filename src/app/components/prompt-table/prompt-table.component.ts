@@ -4,9 +4,6 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  OnChanges,
-  SimpleChanges,
-  ChangeDetectionStrategy,
   AfterViewInit,
   ViewChild
 } from '@angular/core';
@@ -104,7 +101,6 @@ export class PromptTableComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscriptions.push(this.loadingService.getResponsesLoadingObservable().subscribe(value => {
       if (this.topic!.name == value.topic) {
         this.isResponseGenerationLoading = value.loading > 0;
-        console.log("Responses Loading: "+ value.loading + "," + this.isResponseGenerationLoading);
         if (!this.isResponseGenerationLoading) {
           this.dataSource = new MatTableDataSource(this.topic!.prompts);
           if (this.paginator) {
@@ -117,7 +113,6 @@ export class PromptTableComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscriptions.push(this.loadingService.getRatingsLoadingObservable().subscribe(value => {
       if (this.topic!.name == value.topic) {
         this.isRatingGenerationLoading = value.loading > 0;
-        console.log("Ratings Loading: "+ value.loading + "," + this.isRatingGenerationLoading);
         this.dataSource = new MatTableDataSource(this.topic!.prompts);
         if (this.paginator) {
           this.dataSource.paginator = this.paginator;
